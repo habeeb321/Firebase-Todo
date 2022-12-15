@@ -37,13 +37,25 @@ class ToDoListPage extends StatelessWidget {
                   child: const Text('Add Task')),
             ],
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: 10,
-              itemBuilder: ((context, index) {
-                return const Text('hello');
-              }),
-            ),
+          StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance.collection("todos").snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                return Expanded(
+                  child: ListView(
+                    children: snapshot.data!.docs.map((document) {
+                      return ListTile(
+                        title: Text(document["title"]),
+                      );
+                    }).toList(),
+                  ),
+                );
+              }
+            },
           ),
         ],
       ),
