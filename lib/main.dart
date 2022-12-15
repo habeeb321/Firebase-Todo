@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:todo_list_firebase/to_do_list_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,22 +14,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Firebase Sample',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Home(),
-    );
-  }
-}
-
-class Home extends StatelessWidget {
-  const Home({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('Hello World')),
+      home: ToDoListPage(),
     );
   }
 }
